@@ -1,0 +1,198 @@
+package org.iringtools.services.core;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+
+import org.iringtools.mapping.Classes;
+import org.iringtools.mapping.ClassesList;
+import org.iringtools.mapping.Ordinal;
+import org.iringtools.mapping.Patterns;
+import org.iringtools.mapping.PatternsList;
+import org.iringtools.mapping.Role;
+import org.iringtools.mapping.RoleList;
+import org.iringtools.mapping.Template;
+import org.iringtools.mapping.TemplateMapList;
+
+public class TipProvider
+{
+  private Map<String, Object> _settings;
+  TemplateMapList tml = new TemplateMapList();
+  PatternsList pl = new PatternsList();
+  RoleList rml = new RoleList();
+  ClassesList cl = new ClassesList();
+  Classes c = new Classes();
+  Role role = new Role();
+  Ordinal ord = new Ordinal();
+  EntityManagerFactory emf;
+  EntityTransaction tx;
+  EntityManager em;
+
+  public TipProvider(Map<String, Object> settings)
+  {
+
+    _settings = settings;
+
+  }
+
+  
+    public PatternsList getPattern() throws Exception
+    {  List<Patterns> paresults = new ArrayList<Patterns>();
+       List<Ordinal> ordresults = new ArrayList<Ordinal>();
+    try {
+      emf =    Persistence.createEntityManagerFactory("Tips-Jpa");
+    em = emf.createEntityManager(); tx = em.getTransaction();
+    tx.begin(); List resultList = em.createQuery("from Patterns").getResultList(); 
+    paresults = resultList;
+    //System.out.println(paresults);
+    for (Patterns event : paresults) 
+    {
+   // System.out.println("Patterns (" + event.getId() + ") : " + event.getName()+"::"+  event.getPatternId());    
+    ordresults = event.getPatternId();
+    for (Ordinal oevent : ordresults)
+    { System.out.println("ordinal (" + oevent.getOrdinal());
+    }
+    } pl.setItems(paresults); 
+    }
+    catch (PersistenceException e)
+    {    
+    e.printStackTrace(); 
+    }
+    finally 
+    {// ((EntityManager) tx).close(); em.close();
+      emf.close(); 
+      }
+    return pl;
+    }
+
+  public TemplateMapList getTemplate() throws Exception
+  {
+    List<Template> results = new ArrayList<Template>();
+    List<Role> roleresults = new ArrayList<Role>();
+    List<Classes> classresults = new ArrayList<Classes>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Template").getResultList();
+      results = resultList;
+      for (Template event : results)
+      {
+        roleresults = event.getRoleid();
+        for (Role roevent : roleresults)
+        {
+          classresults = roevent.getClassId();
+          for (Classes clevent : classresults)
+          {
+            // System.out.println("Classes(" + clevent.getId() + ") : " + clevent.getName());
+          }
+        }
+      }
+      tml.setItems(results);
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    { // tx.close();
+      em.close();
+      emf.close();
+    }
+    return tml;
+  }
+
+  public RoleList getRole() throws Exception
+  {
+    List<Role> roleresults = new ArrayList<Role>();
+    List<Classes> classresults = new ArrayList<Classes>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Role").getResultList();
+      roleresults = resultList;
+      for (Role roevent : roleresults)
+      {
+        System.out.println("---" + roevent.getClassId());
+        classresults = roevent.getClassId();
+        for (Classes clevent : classresults)
+        {
+          System.out.println("Classes(" + clevent.getId() + ") : " + clevent.getName());
+        }
+        rml.setItems(roleresults);
+      }
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    {
+      em.close();
+      emf.close();
+    }
+    return rml;
+  }
+
+  public ClassesList getClasses() throws Exception
+  {
+    List<Classes> classresults = new ArrayList<Classes>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Classes").getResultList();
+      classresults = resultList;
+      cl.setItems(classresults);
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    {
+      em.close();
+      emf.close();
+    }
+    return cl;
+  }
+
+  ;
+  /*
+   * public TemplateMaps getTest() throws Exception { List<TipsTest> results = null; TipsTest tt = new TipsTest();
+   * List<TestRole> results1 = null; try { emf = Persistence.createEntityManagerFactory("Tips-Jpa"); em =
+   * emf.createEntityManager(); System.out.println("======="); EntityTransaction tx = em.getTransaction(); tx.begin();
+   * List resultList = em.createQuery("from TipsTest").getResultList(); results = resultList;
+   * System.out.println(results); // tms.settItems(results); System.out.println("======= mapping role to patterns");
+   * List resultList1 = em.createQuery("from TestRole").getResultList(); results1 = resultList;
+   * System.out.println(results1); // tms.settItems(results); for (TestRole event : results1) {
+   * System.out.println("TestRole (" + event.getId() + ") : " + event.getName() + "::" );
+   * 
+   * 
+   * } // em.persist(account); // tx.commit(); // List<TestRole> results = null; //TipsTest tt = new TipsTest(); // try
+   * // { // emf = Persistence.createEntityManagerFactory("Tips-Jpa"); // em = emf.createEntityManager();
+   * System.out.println("======="); // EntityTransaction tx = em.getTransaction(); // tx.begin(); // List resultList =
+   * em.createQuery("from TestRole").getResultList(); // results = resultList; // System.out.println(results); // //
+   * tms.setItems(results); // for (TestRole event : results) // { // System.out.println("TestRole (" + event.getId() +
+   * ") : " + event.getName() + "::" + event.getSeqrole()); // // } // em.persist(account); // tx.commit(); // } } catch
+   * (PersistenceException e) {
+   * 
+   * e.printStackTrace(); } finally { em.close(); emf.close(); } return tms; }
+   */
+}

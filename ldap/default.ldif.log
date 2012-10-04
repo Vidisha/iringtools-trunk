@@ -1,0 +1,137 @@
+version: 1
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.621
+dn: dc=iringug,dc=org
+objectClass: domain
+objectClass: top
+dc: iringug
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.658
+dn: o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: organization
+o: iringtools
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.663
+dn: ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.670
+dn: ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: rights
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.676
+dn: ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.680
+dn: uid=karthur,ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: King
+sn: Arthur
+uid: karthur
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.686
+dn: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: directoryAdmins
+description: Controls admin rights on the directory
+member: uid=guest,ou=users,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.690
+dn: cn=treeNodeAdmin,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: treeNodeAdmin
+member: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.693
+dn: ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: directory
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.697
+dn: uid=guest,ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: iRINGTools
+sn: Guest
+uid: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.700
+dn: cn=adapterAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: adapterAdmins
+description: Controls login to AdapterManager
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.704
+dn: cn=exchangeAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchangeAdmins
+description: Controls login to ExchangeManager and has exchange right
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.709
+dn: cn=exchange,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchange
+member: cn=exchangeAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.712
+dn: cn=user,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: user
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:32:01.716
+dn: cn=rootAdmin,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: rootAdmin
+member: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+

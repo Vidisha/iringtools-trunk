@@ -1,0 +1,594 @@
+version: 1
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.430
+dn: dc=iringug,dc=org
+objectClass: domain
+objectClass: top
+dc: iringug
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.438
+dn: o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: organization
+o: iringtools
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.444
+dn: ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.450
+dn: ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: rights
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.460
+dn: ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.465
+dn: uid=karthur,ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: King
+sn: Arthur
+uid: karthur
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.469
+dn: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: directoryAdmins
+description: Controls admin rights on the directory
+member: uid=guest,ou=users,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.472
+dn: cn=treeNodeAdmin,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: treeNodeAdmin
+member: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.477
+dn: ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: directory
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.482
+dn: uid=guest,ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: iRINGTools
+sn: Guest
+uid: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.488
+dn: cn=adapterAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: adapterAdmins
+description: Controls login to AdapterManager
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.492
+dn: cn=exchangeAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchangeAdmins
+description: Controls login to ExchangeManager and has exchange right
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.495
+dn: cn=exchange,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchange
+member: cn=exchangeAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.499
+dn: cn=user,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: user
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.503
+dn: cn=rootAdmin,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: rootAdmin
+member: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.506
+dn: o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: organization
+o: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.510
+dn: ou=groups,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.513
+dn: cn=team1Admins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: team1Admins
+description: Controls admin rights on the directory
+member: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.517
+dn: cn=adapterAdmins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: adapterAdmins
+description: Controls login to AdapterManager
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+member: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.521
+dn: cn=exchangeAdmins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchangeAdmins
+description: Controls login to ExchangeManager and has exchange right
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+member: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.524
+dn: ou=rights,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: rights
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.532
+dn: cn=exchange,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchange
+member: cn=exchangeAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.536
+dn: cn=user,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: user
+member: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.539
+dn: ou=users,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.542
+dn: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: King
+sn: Arthur
+uid: karthur
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.545
+dn: uid=guest,ou=users,o=test,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: iRINGTools
+sn: Guest
+uid: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.548
+dn: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: team1Viewers
+description: Controls admin rights on the directory
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.551
+dn: cn=superadmin,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: superadmin
+description: Controls admin rights on the directory
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.554
+dn: cn=rootAdmin,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: rootAdmin
+member: cn=directoryAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.557
+dn: cn=treeNodeAdmin,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: treeNodeAdmin
+member: cn=directoryAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.562
+dn: cn=12345_000,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: 12345_000
+context: .
+description: .
+member: cn=directoryadmins,ou=groups,o=iringtools,dc=iringug,dc=org
+name: 12345_000
+type: folder
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.566
+dn: cn=asdfasdf,cn=12345_000,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: asdfasdf
+context: 12345_000
+description: .
+member: 
+name: asdfasdf
+type: folder
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.569
+dn: cn=wqerqwer,cn=asdfasdf,cn=12345_000,ou=directory,o=iringtools,dc=iringu
+ g,dc=org
+objectClass: folder
+objectClass: top
+cn: wqerqwer
+context: 54321_000
+description: .
+member: 
+name: wqerqwer
+type: folder
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.573
+dn: cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: wer43
+context: 89000
+description: .
+member: cn=directoryadmins,ou=groups,o=iringtools,dc=iringug,dc=org
+name: wer43
+type: folder
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.577
+dn: cn=qwe123,cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: qwe123
+assembly: org.iringtools.adapter.datalayer.NHibernateDataLayer, NHibernateLi
+ brary
+baseurl: http://localhost:54321
+context: 89000
+description: adsf
+member: 
+name: qwe123
+type: endpoint
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.580
+dn: cn=rty,cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: rty
+assembly: org.iringtools.adapter.datalayer.NHibernateDataLayer, NHibernateLi
+ brary
+baseurl: http://localhost:54321
+context: 89000
+description: zxcv
+member: 
+name: rty
+type: endpoint
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.584
+dn: cn=asdf,cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: asdf
+assembly: org.iringtools.adapter.datalayer.NHibernateDataLayer, NHibernateLi
+ brary
+baseurl: http://localhost:54321
+context: 89000
+description: adsf
+member: 
+name: asdf
+type: endpoint
+user: guest
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.586
+dn: ou=directory,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: directory
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.590
+dn: cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: 12345_000
+context: 12345_000
+description: asdfasdf
+member: cn=team1Admins,ou=groups,o=test,dc=iringug,dc=org
+name: 12345_000
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.595
+dn: cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: Application Data
+context: 12345_000
+description: asdf
+member: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+name: Application Data
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.598
+dn: cn=ABC,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: ABC
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+description: ASDFASDF
+member: 
+name: ABC
+type: endpoint
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.602
+dn: cn=DEF,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: DEF
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+description: ASDF
+member: 
+name: DEF
+type: endpoint
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.606
+dn: cn=TYU,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: TYU
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+description: ASDF
+member: 
+name: TYU
+type: endpoint
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.609
+dn: cn=UIO,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: UIO
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+description: ASDF
+member: 
+name: UIO
+type: endpoint
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.613
+dn: cn=Application,cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: Application
+context: 12345_000
+description: asdfdsaf
+member: 
+name: Application
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.616
+dn: cn=App,cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: App
+context: 12345_000
+description: adsf
+member: 
+name: App
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.620
+dn: cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: 54321_000
+context: asdf
+description: ASDF
+member: cn=team1Admins,ou=groups,o=test,dc=iringug,dc=org
+name: 54321_000
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.623
+dn: cn=def,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: def
+context: asdf
+description: fdg
+member: 
+name: def
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.630
+dn: cn=ABC,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: ABC
+context: asdf
+description: ADSF
+member: 
+name: ABC
+type: folder
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.633
+dn: cn=ABC,cn=ABC,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: ABC
+assembly: .
+baseurl: asdf
+context: asdf
+description: adsf
+member: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+name: ABC
+type: endpoint
+user: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T10:36:00.637
+dn: cn=ert,cn=ABC,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: ert
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: asdf
+description: adsf
+member: 
+name: ert
+type: endpoint
+user: test
+

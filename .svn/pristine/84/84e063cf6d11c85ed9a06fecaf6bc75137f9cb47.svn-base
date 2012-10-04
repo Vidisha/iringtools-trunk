@@ -1,0 +1,99 @@
+package org.iringtools.services.core;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+
+import org.iringtools.mapping.RoleMap;
+import org.iringtools.mapping.RoleMaps;
+import org.iringtools.mapping.TemplateMap;
+import org.iringtools.mapping.TemplateMaps;
+
+public class TipProvider
+{
+  private Map<String, Object> _settings;
+  TemplateMaps tms = new TemplateMaps();
+  RoleMaps rms = new RoleMaps();
+  EntityManagerFactory emf;
+  EntityTransaction tx ;
+  EntityManager em;
+
+  public TipProvider(Map<String, Object> settings)
+  {
+
+    _settings = settings;
+
+  }
+
+  public TemplateMaps getPattern() throws Exception
+  {
+    List<TemplateMap> results = null;
+    try
+    {
+      TemplateMap tm = null;
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction(); 
+      tx.begin();
+      List resultList = em.createQuery("from TemplateMap").getResultList();
+      results = resultList;
+      System.out.println(results);
+      tms.setItems(results);
+  /*    for (TemplateMap event : results)
+      {
+        System.out.println("TemplateMap (" + event.getId() + ") : " + event.getName());
+
+        // tm.setId(event.getId());
+        // tm.setId(event.getName());
+        // tms.getItems().add(tm); System.out.println( tms.getItems().add(tm));
+      }
+      // em.persist(account);
+      // tx.commit();
+*/
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    {// ((EntityManager) tx).close();
+      em.close();
+      emf.close();
+    }
+    return tms;
+  }
+  
+  public RoleMaps getRole() throws Exception
+  {
+    List<RoleMap> results = null;
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      EntityTransaction tx = em.getTransaction(); 
+      tx.begin();
+      List resultList = em.createQuery("from RoleMap").getResultList();
+      results = resultList;
+      System.out.println(results);
+      rms.setItems(results);
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    {
+      em.close();
+      emf.close();
+    }
+    return rms;
+  }
+
+}

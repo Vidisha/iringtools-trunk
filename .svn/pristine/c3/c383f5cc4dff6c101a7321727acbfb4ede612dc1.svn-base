@@ -1,0 +1,427 @@
+package org.iringtools.services.core;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import javax.persistence.Query;
+
+import org.iringtools.mapping.Classes;
+import org.iringtools.mapping.ClassesList;
+import org.iringtools.mapping.Commodity;
+import org.iringtools.mapping.CommodityList;
+import org.iringtools.mapping.CommodityTip;
+import org.iringtools.mapping.CommodityTipList;
+import org.iringtools.mapping.Ordinal;
+import org.iringtools.mapping.OrdinalList;
+import org.iringtools.mapping.Patterns;
+import org.iringtools.mapping.PatternsList;
+import org.iringtools.mapping.Role;
+import org.iringtools.mapping.RoleList;
+import org.iringtools.mapping.Template;
+import org.iringtools.mapping.TemplateMapList;
+import org.iringtools.mapping.Tips;
+import org.iringtools.mapping.TipsList;
+
+public class TipProvider
+{
+  private Map<String, Object> _settings;
+  TemplateMapList tml = new TemplateMapList();
+  PatternsList pl = new PatternsList();
+  CommodityList coml = new CommodityList();
+  CommodityTipList comTipl = new CommodityTipList();
+  RoleList rml = new RoleList();
+  ClassesList cl = new ClassesList();
+  Classes c = new Classes();
+  Role role = new Role();
+  Ordinal ord = new Ordinal();
+  OrdinalList ol = new OrdinalList();
+  TipsList tipl = new TipsList();
+  EntityManagerFactory emf;
+  EntityTransaction tx;
+  EntityManager em;
+
+  public TipProvider(Map<String, Object> settings)
+  {
+
+    _settings = settings;
+
+  }
+
+  public CommodityList getCommodity() throws Exception
+  {
+    List<Commodity> comresults = new ArrayList<Commodity>();
+
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Commodity").getResultList();
+      comresults = resultList;
+      /*
+       * // System.out.println(paresults); for (Patterns event : paresults) { // System.out.println("Patterns (" +
+       * event.getId() + ") : " + event.getName()+"::"+ event.getPatternId()); ordresults = event.getPatternId(); for
+       * (Ordinal oevent : ordresults) { System.out.println("ordinal (" + oevent.getOrdinal()); } }
+       */
+      coml.setItems(comresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      emf.close();
+    }
+    return coml;
+  }
+
+  public TipsList getTips() throws Exception
+  {
+    List<Tips> tipresults = new ArrayList<Tips>();
+    List<Patterns> paresults = new ArrayList<Patterns>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Tips").getResultList();
+      tipresults = resultList;
+      for (Tips event : tipresults)
+      {
+        System.out.println("Tip (" + event.getId() + ") : " + event.getName());
+        paresults = event.getPatId();
+        // ordresults = null;
+        for (Patterns oevent : paresults)
+        {}
+      }
+      tipl.setItems(tipresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      emf.close();
+    }
+    return tipl;
+  }
+
+  public CommodityTipList getCommodityTip() throws Exception
+  {
+    List<CommodityTip> comtipresults = new ArrayList<CommodityTip>();
+
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from CommodityTip").getResultList();
+      comtipresults = resultList;
+      /*
+       * for (CommodityTip event : comtipresults) { System.out.println("CommodityTip (" +event.getTipId()+ ") : " +
+       * event.getCommodityId());
+       * 
+       * }
+       */
+      comTipl.setItems(comtipresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      emf.close();
+    }
+    return comTipl;
+  }
+
+  public PatternsList getPattern() throws Exception
+  {
+    List<Patterns> paresults = new ArrayList<Patterns>();
+    List<Ordinal> ordresults = new ArrayList<Ordinal>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Patterns").getResultList();
+      paresults = resultList;
+      // System.out.println(paresults);
+      for (Patterns event : paresults)
+      {
+        event.setPatternId(null);
+        /*
+         * ordresults = event.getPatternId(); for (Ordinal oevent : ordresults) { System.out.println("ordinal (" +
+         * oevent.getOrdinal()); }
+         */
+      }
+      pl.setItems(paresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {// ((EntityManager) tx).close(); em.close();
+      emf.close();
+    }
+    return pl;
+  }
+
+  public TemplateMapList getTemplate() throws Exception
+  {
+    List<Template> results = new ArrayList<Template>();
+    List<Role> roleresults = new ArrayList<Role>();
+    List<Classes> classresults = new ArrayList<Classes>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Template").getResultList();
+      results = resultList;
+      for (Template event : results)
+      {
+        roleresults = event.getRoleid();
+        for (Role roevent : roleresults)
+        {
+          classresults = roevent.getClassId();
+          for (Classes clevent : classresults)
+          {
+            // System.out.println("Classes(" + clevent.getId() + ") : " + clevent.getName());
+          }
+        }
+      }
+      tml.setItems(results);
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    { // tx.close();
+      em.close();
+      emf.close();
+    }
+    return tml;
+  }
+
+  public RoleList getRole() throws Exception
+  {
+    List<Role> roleresults = new ArrayList<Role>();
+    List<Ordinal> ordresults = new ArrayList<Ordinal>();
+    List<Classes> classresults = new ArrayList<Classes>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Role").getResultList();
+      roleresults = resultList;
+      for (Role roevent : roleresults)
+      {
+        System.out.println("---" + roevent.getClassId());
+        classresults = roevent.getClassId();
+        for (Classes clevent : classresults)
+        {
+          System.out.println("Classes(" + clevent.getId() + ") : " + clevent.getName());
+        }
+        rml.setItems(roleresults);
+      }
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    {
+      em.close();
+      emf.close();
+    }
+    return rml;
+  }
+
+  public ClassesList getClasses() throws Exception
+  {
+    List<Classes> classresults = new ArrayList<Classes>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      EntityTransaction tx = em.getTransaction();
+      tx.begin();
+      List resultList = em.createQuery("from Classes").getResultList();
+      classresults = resultList;
+      cl.setItems(classresults);
+    }
+    catch (PersistenceException e)
+    {
+
+      e.printStackTrace();
+    }
+    finally
+    {
+      em.close();
+      emf.close();
+    }
+    return cl;
+  }
+
+  public TipsList getTipPatterns(String id)
+  {
+    List<Tips> tipresults = new ArrayList<Tips>();
+    List<Ordinal> ordresults = new ArrayList<Ordinal>();
+    List<Patterns> paresults = new ArrayList<Patterns>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      Query query = em.createQuery("from Tips t where t.id = :id");
+      query.setParameter("id", id);
+      List resultList = query.getResultList();
+      tipresults = resultList;
+      for (Tips event : tipresults)
+      {
+        Query query1 = em.createQuery("from Patterns p where p.tipId = :id");
+        query1.setParameter("id", id);
+        List resultList1 = query1.getResultList();
+        paresults = event.getPatId();
+        paresults = resultList1;
+        System.out.println("pattern id is ::" + paresults);
+        event.setPatId(paresults);
+        for (Patterns pevent : paresults)
+        {
+          ordresults = pevent.getPatternId();
+          pevent.setPatternId(null);
+        }
+      }
+      tipl.setItems(tipresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {
+      emf.close();
+    }
+    return tipl;
+
+  }
+
+  public PatternsList getTipPattOrdinal(String id, String pid)
+  {
+    List<Patterns> paresults = new ArrayList<Patterns>();
+    List<Ordinal> ordresults = new ArrayList<Ordinal>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+      Query query = em.createQuery("from Patterns p where p.tipId = :id and p.id = :pid");
+      query.setParameter("id", id);
+      query.setParameter("pid", pid);
+      List resultList = query.getResultList();
+      paresults = resultList;
+      for (Patterns event : paresults)
+      {
+        ordresults = event.getPatternId();
+        for (Ordinal oevent : ordresults)
+        {}
+      }
+      pl.setItems(paresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {// ((EntityManager) tx).close(); em.close();
+      emf.close();
+    }
+    return pl;
+
+  }
+
+  public OrdinalList getPattOrdinal(String id, String pid)
+  {
+    List<Patterns> paresults = new ArrayList<Patterns>();
+    List<Ordinal> ordresults = new ArrayList<Ordinal>();
+    try
+    {
+      emf = Persistence.createEntityManagerFactory("Tips-Jpa");
+      em = emf.createEntityManager();
+      tx = em.getTransaction();
+      tx.begin();
+    /*  Query query = em.createQuery("from Patterns p where p.id = :pid");
+      query.setParameter("pid", pid);
+      List resultList = query.getResultList();
+      paresults = resultList;
+      for (Patterns event : paresults)
+      {*/
+        Query query1 = em.createQuery("from Ordinal o where o.patternId = :id");
+        query1.setParameter("id", pid);
+        List resultList1 = query1.getResultList();
+        ordresults = resultList1;
+    //    event.setPatternId(ordresults);
+        for (Ordinal oevent : ordresults)
+        {}
+  //    }
+  //    pl.setItems(paresults);
+        ol.setItems(ordresults);
+    }
+    catch (PersistenceException e)
+    {
+      e.printStackTrace();
+    }
+    finally
+    {// ((EntityManager) tx).close(); em.close();
+      emf.close();
+    }
+    return ol;
+
+  }
+
+  ;
+  /*
+   * public TemplateMaps getTest() throws Exception { List<TipsTest> results = null; TipsTest tt = new TipsTest();
+   * List<TestRole> results1 = null; try { emf = Persistence.createEntityManagerFactory("Tips-Jpa"); em =
+   * emf.createEntityManager(); System.out.println("======="); EntityTransaction tx = em.getTransaction(); tx.begin();
+   * List resultList = em.createQuery("from TipsTest").getResultList(); results = resultList;
+   * System.out.println(results); // tms.settItems(results); System.out.println("======= mapping role to patterns");
+   * List resultList1 = em.createQuery("from TestRole").getResultList(); results1 = resultList;
+   * System.out.println(results1); // tms.settItems(results); for (TestRole event : results1) {
+   * System.out.println("TestRole (" + event.getId() + ") : " + event.getName() + "::" );
+   * 
+   * 
+   * } // em.persist(account); // tx.commit(); // List<TestRole> results = null; //TipsTest tt = new TipsTest(); // try
+   * // { // emf = Persistence.createEntityManagerFactory("Tips-Jpa"); // em = emf.createEntityManager();
+   * System.out.println("======="); // EntityTransaction tx = em.getTransaction(); // tx.begin(); // List resultList =
+   * em.createQuery("from TestRole").getResultList(); // results = resultList; // System.out.println(results); // //
+   * tms.setItems(results); // for (TestRole event : results) // { // System.out.println("TestRole (" + event.getId() +
+   * ") : " + event.getName() + "::" + event.getSeqrole()); // // } // em.persist(account); // tx.commit(); // } } catch
+   * (PersistenceException e) {
+   * 
+   * e.printStackTrace(); } finally { em.close(); emf.close(); } return tms; }
+   */
+}

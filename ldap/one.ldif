@@ -1,0 +1,441 @@
+version: 1
+
+dn: dc=iringug,dc=org
+objectClass: domain
+objectClass: top
+dc: iringug
+
+dn: o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: organization
+o: iringtools
+
+dn: ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: rights
+
+dn: ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: uid=karthur,ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: top
+cn: King
+sn: Arthur
+uid: karthur
+
+dn: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: directoryAdmins
+description: Controls admin rights on the directory
+member: uid=guest,ou=users,o=iringtools,dc=iringug,dc=org
+
+dn: cn=treeNodeAdmin,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: treeNodeAdmin
+member: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+dn: ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: directory
+
+dn: uid=guest,ou=users,o=iringtools,dc=iringug,dc=org
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: top
+cn: iRINGTools
+sn: Guest
+uid: guest
+
+dn: cn=adapterAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: adapterAdmins
+description: Controls login to AdapterManager
+
+dn: cn=exchangeAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchangeAdmins
+description: Controls login to ExchangeManager and has exchange right
+
+dn: cn=exchange,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchange
+member: cn=exchangeAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+dn: cn=user,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: user
+
+dn: cn=rootAdmin,ou=rights,o=iringtools,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: rootAdmin
+member: cn=directoryAdmins,ou=groups,o=iringtools,dc=iringug,dc=org
+
+dn: o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: organization
+o: test
+
+dn: ou=groups,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: cn=team1Admins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: team1Admins
+description: Controls admin rights on the directory
+member: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+
+dn: cn=adapterAdmins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: adapterAdmins
+description: Controls login to AdapterManager
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+member: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+
+dn: cn=exchangeAdmins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchangeAdmins
+description: Controls login to ExchangeManager and has exchange right
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+member: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+
+dn: ou=rights,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: rights
+
+dn: cn=exchange,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: exchange
+member: cn=exchangeAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+dn: cn=user,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: user
+member: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+
+dn: ou=users,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: top
+cn: King
+sn: Arthur
+uid: karthur
+
+dn: uid=guest,ou=users,o=test,dc=iringug,dc=org
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: top
+cn: iRINGTools
+sn: Guest
+uid: guest
+
+dn: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: team1Viewers
+description: Controls admin rights on the directory
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+
+dn: cn=superadmin,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: superadmin
+description: Controls admin rights on the directory
+
+dn: cn=rootAdmin,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: rootAdmin
+member: cn=directoryAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+dn: cn=treeNodeAdmin,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: treeNodeAdmin
+member: cn=directoryAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+dn: cn=12345_000,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: 12345_000
+description: .
+member: cn=directoryadmins,ou=groups,o=iringtools,dc=iringug,dc=org
+name: 12345_000
+context: .
+type: folder
+user: guest
+
+dn: cn=asdfasdf,cn=12345_000,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: asdfasdf
+description: .
+member: 
+name: asdfasdf
+context: 12345_000
+type: folder
+user: guest
+
+dn: cn=wqerqwer,cn=asdfasdf,cn=12345_000,ou=directory,o=iringtools,dc=iringu
+ g,dc=org
+objectClass: folder
+objectClass: top
+cn: wqerqwer
+description: .
+member: 
+name: wqerqwer
+context: 54321_000
+type: folder
+user: guest
+
+dn: cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: wer43
+description: .
+member: cn=directoryadmins,ou=groups,o=iringtools,dc=iringug,dc=org
+name: wer43
+context: 89000
+type: folder
+user: guest
+
+dn: cn=qwe123,cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: qwe123
+description: adsf
+member: 
+name: qwe123
+assembly: org.iringtools.adapter.datalayer.NHibernateDataLayer, NHibernateLi
+ brary
+baseurl: http://localhost:54321
+context: 89000
+type: endpoint
+user: guest
+
+dn: cn=rty,cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: rty
+description: zxcv
+member: 
+name: rty
+assembly: org.iringtools.adapter.datalayer.NHibernateDataLayer, NHibernateLi
+ brary
+baseurl: http://localhost:54321
+context: 89000
+type: endpoint
+user: guest
+
+dn: cn=asdf,cn=wer43,ou=directory,o=iringtools,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: asdf
+description: adsf
+member: 
+name: asdf
+assembly: org.iringtools.adapter.datalayer.NHibernateDataLayer, NHibernateLi
+ brary
+baseurl: http://localhost:54321
+context: 89000
+type: endpoint
+user: guest
+
+dn: ou=directory,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: directory
+
+dn: cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: 12345_000
+description: asdfasdf
+member: cn=team1Admins,ou=groups,o=test,dc=iringug,dc=org
+name: 12345_000
+context: 12345_000
+type: folder
+user: test
+
+dn: cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: Application Data
+description: asdf
+member: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+name: Application Data
+context: 12345_000
+type: folder
+user: test
+
+dn: cn=ABC,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: ABC
+description: ASDFASDF
+member: 
+name: ABC
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+type: endpoint
+user: test
+
+dn: cn=DEF,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: DEF
+description: ASDF
+member: 
+name: DEF
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+type: endpoint
+user: test
+
+dn: cn=TYU,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: TYU
+description: ASDF
+member: 
+name: TYU
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+type: endpoint
+user: test
+
+dn: cn=UIO,cn=Application Data,cn=12345_000,ou=directory,o=test,dc=iringug,d
+ c=org
+objectClass: top
+objectClass: endpoint
+cn: UIO
+description: ASDF
+member: 
+name: UIO
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: 12345_000
+type: endpoint
+user: test
+
+dn: cn=Application,cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: Application
+description: asdfdsaf
+member: 
+name: Application
+context: 12345_000
+type: folder
+user: test
+
+dn: cn=App,cn=12345_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: App
+description: adsf
+member: 
+name: App
+context: 12345_000
+type: folder
+user: test
+
+dn: cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: 54321_000
+description: ASDF
+member: cn=team1Admins,ou=groups,o=test,dc=iringug,dc=org
+name: 54321_000
+context: asdf
+type: folder
+user: test
+
+dn: cn=def,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: def
+description: fdg
+member: 
+name: def
+context: asdf
+type: folder
+user: test
+
+dn: cn=ABC,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: folder
+objectClass: top
+cn: ABC
+description: ADSF
+member: 
+name: ABC
+context: asdf
+type: folder
+user: test
+
+dn: cn=ABC,cn=ABC,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: ABC
+description: adsf
+member: cn=team1Viewers,ou=groups,o=test,dc=iringug,dc=org
+name: ABC
+assembly: .
+baseurl: asdf
+context: asdf
+type: endpoint
+user: test
+
+dn: cn=ert,cn=ABC,cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: endpoint
+cn: ert
+description: adsf
+member: 
+name: ert
+assembly: .
+baseurl: http:..localhost:54321.adapter
+context: asdf
+type: endpoint
+user: test
+

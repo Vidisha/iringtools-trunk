@@ -1,0 +1,101 @@
+version: 1
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.200
+dn: dc=iringug,dc=org
+objectClass: domain
+objectClass: top
+dc: iringug
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.210
+dn: o=test,dc=iringug,dc=org
+objectClass: top
+objectClass: organization
+o: test
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.229
+dn: ou=groups,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.235
+dn: ou=rights,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: rights
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.240
+dn: ou=users,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.245
+dn: uid=karthur,ou=users,o=test,dc=iringug,dc=org
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: top
+cn: King
+sn: Arthur
+uid: karthur
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.249
+dn: cn=directoryAdmins,ou=groups,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: directoryAdmins
+description: Controls admin rights on the directory
+member: uid=guest,ou=users,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.253
+dn: cn=treeNodeAdmin,ou=rights,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: treeNodeAdmin
+member: cn=directoryAdmins,ou=groups,o=test,dc=iringug,dc=org
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.257
+dn: ou=directory,o=test,dc=iringug,dc=org
+objectClass: organizationalUnit
+objectClass: top
+ou: directory
+
+
+#!RESULT OK
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.262
+dn: cn=54321_000,ou=directory,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: 54321_000
+ou: 54321_000
+
+#!RESULT ERROR
+#!CONNECTION ldap://localhost:389
+#!DATE 2012-09-25T09:47:39.266
+#!ERROR [LDAP: error code 67 - Entry cn=ABC,ou=directory,o=test,dc=iringug,dc=org cannot be modified because the change to attribute cn would have removed a value used in the RDN]
+dn: cn=ABC,ou=directory,o=test,dc=iringug,dc=org
+objectClass: groupOfNames
+objectClass: top
+cn: 54321_000
+ou: directory
+
